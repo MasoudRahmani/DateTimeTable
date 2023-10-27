@@ -123,13 +123,13 @@ namespace DateTimeTable.Logic
                                 string.Concat(p_year, p_month_pad, p_day_pad), p_year, p_month, p_day,
                                 string.Concat(p_month, p_day_pad), p_persinadayofweek,
                                 p_monthName, string.Concat(p_year, "/", p_month_pad, "/", p_day_pad),
-                                ToInt32(string.Concat(p_year, p_month_pad, p_day_pad)), string.Concat(p_year, "/", p_month_pad),
+                                ToInt32(string.Concat(p_year, p_month_pad)), string.Concat(p_year, "/", p_month_pad),
                                 p_dayofweekName, string.Concat("هفته ", p_weekofYear), p_weekofYear,
                                 string.Concat(p_dayofweekName, " ", p_day, " ", p_monthName, " ", p_year),
                                 //Hijri
                                 string.Concat(h_year, h_month_pad, h_day_pad), h_year, h_month, h_day,
                                 string.Concat(h_month, h_day_pad), p_persinadayofweek, h_monthname,
-                                string.Concat(h_year, "/", h_month_pad, "/", h_day_pad), ToInt32(string.Concat(h_year, h_month_pad, h_day_pad)),
+                                string.Concat(h_year, "/", h_month_pad, "/", h_day_pad), ToInt32(string.Concat(h_year, h_month_pad)),
                                 string.Concat(h_year, "/", h_month_pad), h_dayname,
                                 string.Concat("الأسبوع ", h_weekofYear), h_weekofYear,
                                 //Tots
