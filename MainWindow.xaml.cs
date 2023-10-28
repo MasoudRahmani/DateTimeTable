@@ -33,15 +33,14 @@ namespace DateTimeTable
 
         }
 
-
         #region WPFEvent
 
         private void Fill_databases(object sender, RoutedEventArgs e)
         {
-            if (Integrated.IsChecked == false)
+            if (IntegratedChecked == false)
                 ;//ask for user and pass
 
-            var _helper = new SQLConnectionHelper(_srv, IntegratedChecked);
+            var _helper = new SQLConnectionHelper(_srv);
             Databases.ItemsSource = _helper.GetDatabases();
         }
 
@@ -49,32 +48,29 @@ namespace DateTimeTable
 
         private void NotEnoughData(string why)
         {
-            using (TaskDialog dialog = new TaskDialog())
-            {
-                dialog.WindowTitle = ".اطلاعات کافی نمی باشد";
-                dialog.MainInstruction = "لطفا اطلاعات را صحیح و کامل وارد فرمایید";
-                dialog.Content = ".این خطا به علت اشتباه بودن اطلاعات وارده یا کمبود اطلاعات می باشد\n .می تواند با کلیک بر اطلاعات بیشتر از علت خطا مطلع شوید";
-                dialog.ExpandedInformation = why;
-                dialog.Footer = "Created By Masoud Rahmani.";
-                dialog.FooterIcon = TaskDialogIcon.Shield;
-                TaskDialogButton okButton = new TaskDialogButton(ButtonType.Ok);
-                TaskDialogButton cancelButton = new TaskDialogButton(ButtonType.Cancel);
-                dialog.Buttons.Add(okButton);
-                dialog.Buttons.Add(cancelButton);
-                TaskDialogButton button = dialog.ShowDialog(this);
-            }
+            using TaskDialog dialog = new();
+            dialog.WindowTitle = ".اطلاعات کافی نمی باشد";
+            dialog.MainInstruction = "لطفا اطلاعات را صحیح و کامل وارد فرمایید";
+            dialog.Content = ".این خطا به علت اشتباه بودن اطلاعات وارده یا کمبود اطلاعات می باشد\n .می تواند با کلیک بر اطلاعات بیشتر از علت خطا مطلع شوید";
+            dialog.ExpandedInformation = why;
+            dialog.Footer = "Created By Masoud Rahmani.";
+            dialog.FooterIcon = TaskDialogIcon.Shield;
+            TaskDialogButton okButton = new TaskDialogButton(ButtonType.Ok);
+            TaskDialogButton cancelButton = new TaskDialogButton(ButtonType.Cancel);
+            dialog.Buttons.Add(okButton);
+            dialog.Buttons.Add(cancelButton);
+            TaskDialogButton button = dialog.ShowDialog(this);
         }
+
         private void StartToCreate(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(_db))
-            {
                 NotEnoughData("مقدار دیتابیس خالی می باشد.");
-            }
             else
             {
                 UpdateLayoutToInformStartofJob();
 
-                DateCreator bl = new DateCreator(_srv, _db, _table, IntegratedChecked);
+                DateCreator bl = new(_srv, _db, _table);
 
                 CalculateDates(bl);
             }
@@ -110,7 +106,7 @@ namespace DateTimeTable
         /// <param name="sender">CheckBox</param>
         private void GetCredentialEvent(object sender, RoutedEventArgs e)
         {
-            using (CredentialDialog credentialDialog = new CredentialDialog())
+            using (CredentialDialog credentialDialog = new())
             {
                 credentialDialog.MainInstruction = "رمز و پسورد خود را وارد کنید.";
                 credentialDialog.Content = "این رمز و پسورد جهت ورود به دیتابیس استفاده میشود و بلافاصله از حافظه پاک میشود.";
@@ -125,10 +121,15 @@ namespace DateTimeTable
                     _user = credentialDialog.UserName;
                     _passs = credentialDialog.Password;
 
-                    MessageBox.Show(this, string.Format("You entered the following information:\nUser name: {0}\nPassword: {1}", credentialDialog.Credentials.UserName, credentialDialog.Credentials.Password), "Credential dialog sample");
+                    bool result = new SQLConnectionHelper(_srv, _user, _passs).CheckCredential();
+
                     // Normally, you should verify if the credentials are correct before calling ConfirmCredentials.
                     // ConfirmCredentials will save the credentials if and only if the user checked the save checkbox.
-                    credentialDialog.ConfirmCredentials(true);
+                    //if (result)
+                    //    credentialDialog.ConfirmCredentials(true);
+                    //else credentialDialog.ConfirmCredentials(false);
+                    if (!result)
+                        NotEnoughData("رمز اشتباه است");
                 }
             }
         }
