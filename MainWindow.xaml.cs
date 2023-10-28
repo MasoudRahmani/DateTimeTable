@@ -37,11 +37,13 @@ namespace DateTimeTable
 
         private void Fill_databases(object sender, RoutedEventArgs e)
         {
-            if (IntegratedChecked == false)
-                ;//ask for user and pass
+            SQLConnectionHelper helper;
+            if (IntegratedChecked)
+                helper = new SQLConnectionHelper(_srv);
+            else
+                helper = new SQLConnectionHelper(_srv, _user, _passs);
 
-            var _helper = new SQLConnectionHelper(_srv);
-            Databases.ItemsSource = _helper.GetDatabases();
+            Databases.ItemsSource = helper.GetDatabases();
         }
 
         #endregion
@@ -130,6 +132,8 @@ namespace DateTimeTable
                     //else credentialDialog.ConfirmCredentials(false);
                     if (!result)
                         NotEnoughData("رمز اشتباه است");
+
+                    //بررسی cancel
                 }
             }
         }
