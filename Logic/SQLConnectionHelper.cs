@@ -10,30 +10,39 @@ namespace DateTimeTable.Logic
 {
     public class SQLConnectionHelper
     {
-        private string _cnnSTR;
+        private string _cnnSTR = string.Empty;
+        private string _user = string.Empty;
+        private string _password = string.Empty;
 
         #region Property
         public string Server { get; }
         public string Database { get; set; }
         public string TableName { get; set; }
         public bool IntegratedSecurity { get; }
-        #endregion
 
-        public SQLConnectionHelper(string server, bool integrated)
+        #endregion
+        /// <summary>
+        /// Initialise Helper with Integrated Security as Enabled
+        /// </summary>
+        public SQLConnectionHelper(string server)
         {
             Server = server;
-            IntegratedSecurity = integrated;
+            IntegratedSecurity = true;
+        }
+        /// <summary>
+        /// Initialise Helper with Integrated Security as false therefore requires user and pass
+        /// </summary>
+        public SQLConnectionHelper(string server, string username, string password)
+        {
+            IntegratedSecurity = false;
+            Server = server;
+            _user = username;
+            _password = password;
         }
 
         public SqlConnection GetSqlConnection(ConnectionStringConfig instanceType, bool encrypted, bool trustCert)
         {
-            var cnstr = new SqlConnectionStringBuilder
-            {
-                DataSource = Server,
-                IntegratedSecurity = IntegratedSecurity,
-                Encrypt = encrypted, //Either have encyption set to false or trust certificate
-                TrustServerCertificate = trustCert // in new version when server doesnt have certificate or some problem
-            };
+            SqlConnectionStringBuilder cnstr = GetConnectionStringBuilder(encrypted, trustCert);
 
             SqlConnection sqlConnection;
             switch (instanceType)
@@ -55,6 +64,36 @@ namespace DateTimeTable.Logic
                     throw new Exception("No Instance");
             }
         }
+
+        private SqlConnectionStringBuilder GetConnectionStringBuilder(bool encrypted, bool trustCert)
+        {
+            SqlConnectionStringBuilder cnstr;
+            if (IntegratedSecurity)
+            {
+                cnstr = new SqlConnectionStringBuilder
+                {
+                    DataSource = Server,
+                    IntegratedSecurity = IntegratedSecurity,
+                    Encrypt = encrypted, //Either have encyption set to false or trust certificate
+                    TrustServerCertificate = trustCert // in new version when server doesnt have certificate or some problem
+                };
+            }
+            else
+            {
+                cnstr = new SqlConnectionStringBuilder
+                {
+                    DataSource = Server,
+                    IntegratedSecurity = IntegratedSecurity,
+                    UserID = _user,
+                    Password = _password,
+                    Encrypt = encrypted, //Either have encyption set to false or trust certificate
+                    TrustServerCertificate = trustCert // in new version when server doesnt have certificate or some problem
+                };
+            }
+
+            return cnstr;
+        }
+
         public IEnumerable<object> GetDatabases()
         {
             using (var _sqlcnn = GetSqlConnection(ConnectionStringConfig.OnlyServer, true, true))
@@ -104,6 +143,23 @@ namespace DateTimeTable.Logic
 
                 }
                 sqlcnn.Close();
+            }
+
+        }
+
+        public bool CheckCredential()
+        {
+            try
+            {
+                var d = GetSqlConnection(ConnectionStringConfig.OnlyServer, true, true);
+                d.Open();
+                d.Close();
+                d.Dispose();
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
             }
 
         }

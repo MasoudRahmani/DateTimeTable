@@ -8,9 +8,9 @@ namespace DateTimeTable.Logic
     public class DateCreator
     {
         private SQLConnectionHelper _sqlhelper;
-        public DateCreator(string server, string database, string tablename, bool integrated)
+        public DateCreator(string server, string database, string tablename)
         {
-            _sqlhelper = new SQLConnectionHelper(server, integrated)
+            _sqlhelper = new SQLConnectionHelper(server)
             {
                 Database = database,
                 TableName = tablename
