@@ -202,17 +202,6 @@
                    Width="458"
                    FontFamily="B Nazanin"
                    FontSize="15"><Run Text="لطفا دیتابیسی جهت ساخت جدول با نام دلخواه خود انتخاب بفرمایید تا جدول تقویم در آن ایجاد گردد." /><LineBreak /><Run Text="دقت داشته باشید که نباید نام جدول تکراری بوده باشد، بازه ی انتخابی شما در پایگاه داده ذخیره میگرد." /></TextBlock>
-        <TextBlock FlowDirection="RightToLeft"
-                   HorizontalAlignment="Center"
-                   Margin="11,136,23,23"
-                   TextWrapping="Wrap"
-                   VerticalAlignment="Center"
-                   Grid.ColumnSpan="2"
-                   Height="22"
-                   Width="458"
-                   FontFamily="B Nazanin"
-                   FontWeight="Bold"
-                   TextDecorations="Underline"><Run Text=" *" /><Run Text="در حال حاضر تنها اتصال ویندوزی پشتیبانی میشود." /></TextBlock>
         <TextBlock Grid.Column="1"
                    HorizontalAlignment="Center"
                    Margin="164,10,22,0"
