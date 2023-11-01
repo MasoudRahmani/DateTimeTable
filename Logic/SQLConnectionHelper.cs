@@ -110,6 +110,7 @@ namespace DateTimeTable.Logic
             using (var sqlcnn = GetSqlConnection(ConnectionStringConfig.WithDatabase, true, true))
             {
                 sqlcnn.Open();
+
                 using (var sqlCmd = new SqlCommand(createCommand, sqlcnn))
                 {
                     sqlCmd.ExecuteNonQuery();
@@ -117,6 +118,46 @@ namespace DateTimeTable.Logic
                 sqlcnn.Close();
             }
         }
+        public void CreateFunction(string command)
+        {
+            string an = "SET ANSI_NULLS ON";
+            string qi = "SET QUOTED_IDENTIFIER ON";
+            using (var sqlcnc = GetSqlConnection(ConnectionStringConfig.WithDatabase, true, true))
+            {
+                sqlcnc.Open();
+                using SqlCommand an_cmd = new(an, sqlcnc);
+                using SqlCommand qi_cmd = new(qi, sqlcnc);
+                an_cmd.ExecuteNonQuery();
+                qi_cmd.ExecuteNonQuery();
+
+                using SqlCommand sqlcmd = new(command, sqlcnc);
+                sqlcmd.ExecuteNonQuery();
+                sqlcnc.Close();
+            }
+        }
+
+        public bool HasRows(string command)
+        {
+            using var sqlcnn = GetSqlConnection(ConnectionStringConfig.WithDatabase, true, true);
+            using SqlCommand cmd = new(command, sqlcnn);
+
+            bool hasRows;
+            try
+            {
+                sqlcnn.Open();
+                var reader = cmd.ExecuteReader();
+                hasRows = reader.HasRows;
+                sqlcnn.Close();
+                return hasRows;
+            }
+            catch (Exception)
+            {
+                hasRows = false;
+                sqlcnn.Close();
+                return hasRows;
+            }
+        }
+
         public DataTable GetTableScheme()
         {
             var dt = new DataTable();
