@@ -1,6 +1,8 @@
 ﻿using DateTimeTable.Logic;
+using Microsoft.Data.SqlClient;
 using Ookii.Dialogs.Wpf;
 using System;
+using System.Data;
 using System.Threading.Tasks;
 using System.Windows;
 namespace DateTimeTable
@@ -30,10 +32,16 @@ namespace DateTimeTable
             IntegratedChecked = true;
             InitializeComponent();
             this.DataContext = this;
+            this.Loaded += MainWindow_Loaded;
+        }
 
+        private void MainWindow_Loaded(object sender, RoutedEventArgs e)
+        {
+            ;
         }
 
         #region WPFEvent
+
 
         private void Fill_databases(object sender, RoutedEventArgs e)
         {
@@ -64,12 +72,42 @@ namespace DateTimeTable
             TaskDialogButton button = dialog.ShowDialog(this);
         }
 
+        private bool CheckTableExists()
+        {
+            SQLConnectionHelper helper;
+            if (IntegratedChecked) helper = new SQLConnectionHelper(_srv);
+            else helper = new SQLConnectionHelper(_srv, _user, _passs);
+            helper.Database = _db;
+
+            using var cnn = helper.GetSqlConnection(ConnectionStringConfig.WithDatabase, true, true);
+            cnn.Open();
+            var sch = cnn.GetSchema("Tables");
+
+            bool result = false;
+            foreach (DataRow r in sch.Rows)
+            {
+                string tablename = (string)r[2];
+                if (tablename == _table)
+                {
+                    result = true; break;
+                }
+            }
+            cnn.Close();
+            return result;
+        }
+
         private void StartToCreate(object sender, RoutedEventArgs e)
         {
             if (string.IsNullOrEmpty(_db))
                 NotEnoughData("مقدار دیتابیس خالی می باشد.");
             else
             {
+                if (CheckTableExists())
+                {
+                    NotEnoughData("دیتابیس از قبل موجود می باشد، لطفا نام دیگری انتخاب فرمایید.");
+                    return;
+                }
+
                 UpdateLayoutToInformStartofJob();
 
                 DateCreator bl = new(_srv, _db, _table);
