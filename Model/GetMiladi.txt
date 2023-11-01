@@ -1,0 +1,21 @@
+﻿-- =============================================
+-- Author:		Masoud Rahmani
+-- Create date: 2019
+-- Description:	Returns Corrosponding Gregorian Date for a Shamsi date
+--				Input: shamsi date string year/month/day and Returns: gregorain (miladi) DATE
+-- =============================================
+CREATE FUNCTION GetMiladi
+(
+	@inDate CHAR(10)
+)
+RETURNS DATE
+AS
+BEGIN
+	DECLARE	@result DATE;
+	
+	SELECT	@result = d.GregorianDate
+	FROM	dbo.DimDate d
+	WHERE	d.PersianStr = @inDate;
+
+	RETURN @result;
+END

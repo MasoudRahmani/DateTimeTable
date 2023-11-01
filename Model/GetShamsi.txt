@@ -1,0 +1,21 @@
+﻿-- =============================================
+-- Author:		Masoud Rahmani
+-- Create date: 2019
+-- Description:	Returns Corrosponding Shamsi Date for given date
+--				Input: Gregorian Date and Returns: Shamsi nvarchar(10) Date
+-- =============================================
+CREATE FUNCTION GetShamsi
+(
+	@inDate DATETIME
+)
+RETURNS NVARCHAR(10)
+AS
+BEGIN
+	DECLARE @result NVARCHAR(10);
+	
+	SELECT @result=d.PersianStr
+	FROM dbo.DimDate d
+	WHERE GregorianDate = CONVERT(DATE, @inDate);
+
+	RETURN @result;
+END
