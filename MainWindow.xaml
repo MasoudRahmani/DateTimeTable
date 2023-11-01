@@ -7,6 +7,8 @@
         mc:Ignorable="d"
         Title="ایجاد تقویم در پایگاه داده"
         Height="640"
+        MaxHeight="640"
+        MaxWidth="510"
         Width="510">
     <Grid x:Name="MainGrid"
           Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
