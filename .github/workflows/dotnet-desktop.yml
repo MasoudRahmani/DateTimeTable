@@ -24,7 +24,14 @@ jobs:
       run: dotnet restore
       
     - name: Build
-      run: dotnet build
+      run: dotnet build --no-restore
 
     - name: Publish
-      run: dotnet publish SimpleFeedReader/SimpleFeedReader.csproj -c Release -o DateTime
+      run: dotnet publish DateTimeTable.csproj -c Release -o DateTime
+      
+    - name: Upload a Build Artifact
+      uses: actions/upload-artifact@v3
+      with:
+        name: DateTime
+        path: /
+        if-no-files-found: error
