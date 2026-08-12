@@ -67,11 +67,12 @@
                         <TextBlock x:Name="ServerLabel" Text="Server:" FontSize="14" VerticalAlignment="Center" Margin="0,0,3,0" FontWeight="Bold"/>
                         <ComboBox x:Name="ServersCombo" MinWidth="220" MaxWidth="230" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center"
                                   IsEditable="True" Text="{Binding SelectedServer, Mode=TwoWay}" SelectionChanged="ServersCombo_SelectionChanged" />
-                        <Button x:Name="BrowseServerButton" Content="🔍" Click="BrowseServers_Click" BorderThickness="0" Foreground="#FF0BADAA" Background="Transparent" Margin="8,0,0,0" />
+                        <Button x:Name="BrowseServerButton" Content="🔍" Click="BrowseServers_Click" 
+                                BorderThickness="0" Foreground="#FF0BADAA" Background="Transparent" Margin="8,0,0,0" />
                     </StackPanel>
 
                     <Button x:Name="Testbtn" Content="Load Databases" Height="32" Margin="0,8,0,8" Click="Fill_databases"
-                            HorizontalAlignment="Center" Padding="6,0" Background="LightGray" />
+                            HorizontalAlignment="Center" BorderThickness="0,2,0,2" BorderBrush="BlueViolet" />
 
                     <StackPanel Orientation="Horizontal" Margin="0,4,0,4">
                         <TextBlock Text="🗄️" FontSize="18" VerticalAlignment="Center" />
@@ -135,14 +136,14 @@
         </Grid>
         <!-- Footer: progress and status -->
         <Border Grid.Row="2" Background="Transparent" Padding="10">
-            <DockPanel LastChildFill="True">
-                <ProgressBar x:Name="Progressbar" Minimum="0" Height="6" VerticalAlignment="Center" Width="200" DockPanel.Dock="Left" />
-                <StatusBar DockPanel.Dock="Bottom" VerticalAlignment="Center">
+            <StackPanel>
+                <StatusBar>
                     <StatusBarItem>
                         <TextBlock x:Name="StatusText" Text="Ready" />
                     </StatusBarItem>
                 </StatusBar>
-            </DockPanel>
+                <ProgressBar x:Name="Progressbar" Minimum="0" Height="6" VerticalAlignment="Center" HorizontalAlignment="Left" />
+            </StackPanel>
         </Border>
 
     </Grid>
