@@ -143,11 +143,27 @@ namespace DateTimeTable
             }
             catch (OperationCanceledException)
             {
-                SetStatus("Operation timed out.");
+                SetStatus(Properties.Resources.ResourceManager.GetString("OperationTimedOut", CultureInfo.CurrentUICulture) ?? "Operation timed out.");
+            }
+            catch (Microsoft.Data.SqlClient.SqlException sqlEx)
+            {
+                ReportError(sqlEx, "NotEnoughDataTitle");
+            }
+            catch (InvalidOperationException inv)
+            {
+                ReportError(inv, "NotEnoughDataTitle");
+            }
+            catch (UnauthorizedAccessException ua)
+            {
+                ReportError(ua, "NotEnoughDataTitle");
+            }
+            catch (ArgumentException arg)
+            {
+                ReportError(arg, "NotEnoughDataTitle");
             }
             catch (Exception ex)
             {
-                SetStatus("Error: " + ex.Message);
+                ReportError(ex, "NotEnoughDataTitle");
             }
             finally
             {
@@ -228,9 +244,27 @@ namespace DateTimeTable
                 NotEnoughData("مقدار دیتابیس خالی می باشد.");
             else
             {
-                if (CheckTableExists())
+                try
                 {
-                    NotEnoughData("دیتابیس از قبل موجود می باشد، لطفا نام دیگری انتخاب فرمایید.");
+                    bool exists = CheckTableExists();
+                    if (exists)
+                    {
+                        NotEnoughData(Properties.Resources.ResourceManager.GetString("NotEnoughDataContent", CultureInfo.CurrentUICulture) ?? "Table already exists.");
+                        return;
+                    }
+                }
+                catch (Microsoft.Data.SqlClient.SqlException sqlEx)
+                {
+                    var prefix = Properties.Resources.ResourceManager.GetString("ErrorPrefix", CultureInfo.CurrentUICulture) ?? "Error: ";
+                    SetStatus(prefix + sqlEx.Message);
+                    MessageBox.Show(prefix + sqlEx.Message, Properties.Resources.ResourceManager.GetString("NotEnoughDataTitle", CultureInfo.CurrentUICulture) ?? "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    return;
+                }
+                catch (Exception ex)
+                {
+                    var prefix = Properties.Resources.ResourceManager.GetString("ErrorPrefix", CultureInfo.CurrentUICulture) ?? "Error: ";
+                    SetStatus(prefix + ex.Message);
+                    MessageBox.Show(prefix + ex.Message, Properties.Resources.ResourceManager.GetString("NotEnoughDataTitle", CultureInfo.CurrentUICulture) ?? "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     return;
                 }
 
@@ -376,6 +410,26 @@ namespace DateTimeTable
             catch
             {
                 // ignore
+            }
+        }
+
+        private void ReportError(Exception ex, string? fallbackTitleKey = null)
+        {
+            try
+            {
+                var rm = Properties.Resources.ResourceManager;
+                var culture = CultureInfo.CurrentUICulture;
+                var prefix = rm.GetString("ErrorPrefix", culture) ?? "Error: ";
+                var title = rm.GetString(fallbackTitleKey ?? "NotEnoughDataTitle", culture) ?? "Error";
+
+                var message = prefix + (ex?.Message ?? ex?.ToString() ?? "");
+                SetStatus(message);
+                // Show a friendly dialog
+                MessageBox.Show(message, title, MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+            catch
+            {
+                // best-effort: ignore failures while reporting
             }
         }
 
@@ -539,9 +593,17 @@ namespace DateTimeTable
                     SetStatus(Properties.Resources.ResourceManager.GetString("NoLocalInstances", CultureInfo.CurrentUICulture) ?? "No local instances found.");
                 }
             }
+            catch (UnauthorizedAccessException ua)
+            {
+                ReportError(ua, "NotEnoughDataTitle");
+            }
+            catch (System.Security.SecurityException sec)
+            {
+                ReportError(sec, "NotEnoughDataTitle");
+            }
             catch (Exception ex)
             {
-                SetStatus("Error: " + ex.Message);
+                ReportError(ex, "NotEnoughDataTitle");
             }
             finally
             {

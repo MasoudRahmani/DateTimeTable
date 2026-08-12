@@ -63,12 +63,13 @@
                     <TextBlock x:Name="ConnectionHeader" Text="Connection" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,8" />
 
                     <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,4,0,4">
-                        <TextBlock Text="🖥️" FontSize="18" VerticalAlignment="Center" Margin="0,0,8,0" Foreground="#FF157F07" />
-                        <TextBlock x:Name="ServerLabel" Text="Server:" FontSize="14" VerticalAlignment="Center" Margin="0,0,3,0" FontWeight="Bold"/>
-                        <ComboBox x:Name="ServersCombo" MinWidth="220" MaxWidth="230" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center"
-                                  IsEditable="True" Text="{Binding SelectedServer, Mode=TwoWay}" SelectionChanged="ServersCombo_SelectionChanged" />
+                        <TextBlock Text="🖥️" FontSize="18" VerticalAlignment="Center" Foreground="#FF157F07" />
+                        <TextBlock x:Name="ServerLabel" Text="Server:" FontSize="14" VerticalAlignment="Center" Width="75" FontWeight="Bold"/>
+                        <ComboBox x:Name="ServersCombo" MinWidth="200" MaxWidth="210" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                  FontSize="12"
+                                  IsEditable="True" Margin="10,0,0,0" Text="{Binding SelectedServer, Mode=TwoWay}" SelectionChanged="ServersCombo_SelectionChanged" />
                         <Button x:Name="BrowseServerButton" Content="🔍" Click="BrowseServers_Click" 
-                                BorderThickness="0" Foreground="#FF0BADAA" Background="Transparent" Margin="8,0,0,0" />
+                                BorderThickness="0" Foreground="#FF0BADAA" Background="Transparent" />
                     </StackPanel>
 
                     <Button x:Name="Testbtn" Content="Load Databases" Height="32" Margin="0,8,0,8" Click="Fill_databases"
@@ -76,22 +77,24 @@
 
                     <StackPanel Orientation="Horizontal" Margin="0,4,0,4">
                         <TextBlock Text="🗄️" FontSize="18" VerticalAlignment="Center" />
-                        <TextBlock x:Name="DatabaseLabel" Text="Database:" FontSize="14" VerticalAlignment="Center" Margin="0,0,3,0" FontWeight="Bold" />
-                        <ComboBox x:Name="Databases" Height="30" SelectedValue="{Binding SelectedDatebase}" Background="AliceBlue"
+                        <TextBlock x:Name="DatabaseLabel" Text="Database:" FontSize="14" VerticalAlignment="Center" Width="85" FontWeight="Bold" />
+                        <ComboBox x:Name="Databases" Height="30" SelectedValue="{Binding SelectedDatebase}" Background="AliceBlue" Margin="10,0,0,0"
                                   MaxHeight="255" MinWidth="200" HorizontalAlignment="Center" VerticalAlignment="Center" IsEnabled="False" />
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="0,4,0,4">
                         <TextBlock Text="🔒" FontSize="18" VerticalAlignment="Center" />
-                        <TextBlock x:Name="SecurityLabel" Text="Security:" FontSize="14" VerticalAlignment="Center" Margin="0,0,3,0" FontWeight="Bold"/>
-                        <CheckBox x:Name="Integrated" IsEnabled="{Binding IntegratedEnable}" IsChecked="{Binding IntegratedChecked}" 
+                        <TextBlock x:Name="SecurityLabel" Text="Security:" FontSize="14" VerticalAlignment="Center" 
+                                   Width="85" FontWeight="Bold"/>
+                        <CheckBox x:Name="Integrated" IsEnabled="{Binding IntegratedEnable}" IsChecked="{Binding IntegratedChecked}" Margin="10,0,0,0"
                                   Content="Integrated Security" Unchecked="GetCredentialEvent" HorizontalAlignment="Center" VerticalAlignment="Center" />
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
                         <TextBlock Text="📋" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        <TextBlock x:Name="TableNameLabel" Text="Table Name:" FontSize="14" VerticalAlignment="Center" Margin="0,0,3,0" FontWeight="Bold" />
-                        <TextBox x:Name="TableNameTextBox" Text="{Binding TableName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" MaxWidth="250" Height="32" />
+                        <TextBlock x:Name="TableNameLabel" Text="Table Name:" Width="85" FontSize="14" VerticalAlignment="Center" FontWeight="Bold" />
+                        <TextBox x:Name="TableNameTextBox" Text="{Binding TableName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                 Width="200" MaxWidth="250" Height="32" Margin="10,0,0,0" />
                     </StackPanel>
 
                     <Separator Margin="0,12" />
@@ -99,7 +102,6 @@
                     <TextBlock x:Name="ActionsTextBlock" Text="Actions" FontSize="14" FontWeight="SemiBold" Margin="0,6,0,6" />
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
                         <Button x:Name="CreateTableButton" Content="Create Table" Width="140" Height="36" Click="StartToCreate" VerticalAlignment="Center" IsEnabled="False" />
-                        <TextBlock x:Name="FlowTipText" Text="Please load databases first." Foreground="Red" Margin="6,8,0,0" FontWeight="SemiBold" />
                     </StackPanel>
                 </StackPanel>
             </Border>
@@ -107,7 +109,9 @@
             <!-- Right panel: date range and description -->
             <Border Grid.Column="1" Background="White" CornerRadius="8" Padding="14">
                 <StackPanel>
-                    <TextBlock x:Name="CalendarRangeTextBlock" Text="Calendar Range" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,8" />
+                    <Border BorderBrush="DarkGreen" BorderThickness="0,0,0,1" Margin="0,5,0,20">
+                        <TextBlock x:Name="CalendarRangeTextBlock" Text="Calendar Range" FontSize="16" FontWeight="SemiBold" />
+                    </Border>
 
                     <StackPanel Orientation="Horizontal" Margin="0,4,0,4" HorizontalAlignment="Left">
                         <StackPanel>
@@ -120,16 +124,19 @@
                             <DatePicker x:Name="EndDatePicker" Width="160" Height="30" SelectedDateFormat="Long" />
                         </StackPanel>
                     </StackPanel>
-
-                    <TextBlock x:Name="DescriptionTextBlock" Text="Description" FontSize="14" FontWeight="SemiBold" Margin="0,10,0,6" />
+                    <Border BorderBrush="DarkGreen" BorderThickness="0,0,0,1" Margin="0,25,0,20">
+                        <TextBlock x:Name="DescriptionTextBlock" Text="Description" FontSize="14" FontWeight="SemiBold"/>
+                    </Border>
+                    
                     <TextBlock TextWrapping="Wrap" Opacity="0.85" FontSize="13" x:Name="DescriptionBody">
                         This application creates a calendar table in the selected database. Choose the server and database, set your date range, and press Create Table. Existing table names will be checked to avoid duplicates.
                     </TextBlock>
 
-                    <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
-                        <TextBlock x:Name="TipIcon" Text="📌" FontSize="14" VerticalAlignment="Top" Margin="0,2,8,0" />
-                        <TextBlock x:Name="TipTextBlock" Text="Tip: Use the Browse button to auto-detect local SQL Server instances." TextWrapping="Wrap" />
-                    </StackPanel>
+
+
+                    <TextBlock x:Name="TipIcon" Text="📌" FontSize="14" VerticalAlignment="Top" FontWeight="SemiBold" Margin="0,10,0,6" Foreground="Red" />
+                    <TextBlock x:Name="FlowTipText" Text="Please load databases first." TextWrapping="Wrap"
+                               Foreground="Red" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" />
 
                 </StackPanel>
             </Border>
