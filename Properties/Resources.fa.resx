@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+	<xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+	<xsd:element name="root" msdata:IsDataSet="true">
+	  <xsd:complexType>
+		<xsd:choice maxOccurs="unbounded">
+		  <xsd:element name="metadata">
+			<xsd:complexType>
+			  <xsd:sequence>
+				<xsd:element name="value" type="xsd:string" minOccurs="0" />
+			  </xsd:sequence>
+			  <xsd:attribute name="name" use="required" type="xsd:string" />
+			  <xsd:attribute name="type" type="xsd:string" />
+			  <xsd:attribute name="mimetype" type="xsd:string" />
+			  <xsd:attribute ref="xml:space" />
+			</xsd:complexType>
+		  </xsd:element>
+		  <xsd:element name="assembly">
+			<xsd:complexType>
+			  <xsd:attribute name="alias" type="xsd:string" />
+			  <xsd:attribute name="name" type="xsd:string" />
+			</xsd:complexType>
+		  </xsd:element>
+		  <xsd:element name="data">
+			<xsd:complexType>
+			  <xsd:sequence>
+				<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+				<xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+			  </xsd:sequence>
+			  <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+			  <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+			  <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+			  <xsd:attribute ref="xml:space" />
+			</xsd:complexType>
+		  </xsd:element>
+		  <xsd:element name="resheader">
+			<xsd:complexType>
+			  <xsd:sequence>
+				<xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+			  </xsd:sequence>
+			  <xsd:attribute name="name" type="xsd:string" use="required" />
+			</xsd:complexType>
+		  </xsd:element>
+		</xsd:choice>
+	  </xsd:complexType>
+	</xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+	<value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+	<value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+	<value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+	<value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="HeaderTitle">
+	<value>ایجاد جدول تقویم</value>
+  </data>
+  <data name="Subtitle">
+	<value>ایجاد سریع جدول تقویم در پایگاه داده</value>
+  </data>
+  <data name="ConnectionHeader">
+	<value>اتصال</value>
+  </data>
+  <data name="Browse">
+	<value>🔍</value>
+  </data>
+  <data name="TestConnection">
+	<value>بارگذاری دیتابیس</value>
+  </data>
+  <data name="CreateTable">
+	<value>ایجاد جدول</value>
+  </data>
+  <data name="IntegratedSecurity">
+	<value>احراز هویت ویندوز</value>
+  </data>
+  <data name="CalendarRange">
+	<value>بازه تقویم</value>
+  </data>
+  <data name="Start">
+	<value>شروع</value>
+  </data>
+  <data name="End">
+	<value>پایان</value>
+  </data>
+  <data name="DescriptionText">
+	<value>این برنامه یک جدول تقویم در دیتابیسی که انتخاب کرده اید ایجاد می کند. سرور و دیتابیس را انتخاب کرده، بازه را مشخص نموده و روی ایجاد کلیک کنید. نام جدول های موجود بررسی می شوند تا از تکراری بودن جلوگیری شود.</value>
+  </data>
+  <data name="TipText">
+	<value>نکته: از دکمه جستجو برای یافتن نمونه های محلی SQL Server استفاده کنید.</value>
+  </data>
+
+	<data name="TableNameLabel">
+		<value>نام جدول</value>
+	</data>
+	<data name="LanguageLabel">
+		<value>زبان</value>
+	</data>
+	<data name="ServerLabel">
+		<value>سرور:</value>
+	</data>
+	<data name="DatabaseLabel">
+		<value>پایگاه داده:</value>
+	</data>
+	<data name="SecurityLabel">
+		<value>امنیت:</value>
+	</data>
+	<data name="TableNameLabel">
+		<value>نام جدول:</value>
+	</data>
+</root>
