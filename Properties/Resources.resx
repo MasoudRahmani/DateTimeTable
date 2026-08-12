@@ -127,4 +127,116 @@
   <data name="Table" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Model\Table.txt;System.String, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089;utf-8</value>
   </data>
+  <data name="HeaderTitle">
+    <value>DateTime Table</value>
+  </data>
+  <data name="Subtitle">
+    <value>Create calendar tables quickly</value>
+  </data>
+  <data name="ConnectionHeader">
+    <value>Connection</value>
+  </data>
+  <data name="Browse">
+    <value>🔍</value>
+  </data>
+  <data name="TestConnection">
+    <value>Load Databases</value>
+  </data>
+  <data name="CreateTable">
+    <value>Create Table</value>
+  </data>
+  <data name="IntegratedSecurity">
+    <value>Integrated Security</value>
+  </data>
+  <data name="CalendarRange">
+    <value>Calendar Range</value>
+  </data>
+  <data name="Start">
+    <value>Start</value>
+  </data>
+  <data name="End">
+    <value>End</value>
+  </data>
+  <data name="DescriptionText">
+    <value>This application creates a calendar table in the selected database. Choose the server and database, set your date range, and press Create Table. Existing table names will be checked to avoid duplicates.</value>
+  </data>
+  <data name="TipText">
+    <value>Tip: Use the Browse button to auto-detect local SQL Server instances.</value>
+  </data>
+  <data name="TipLoadDatabases">
+    <value>Please load databases first.</value>
+  </data>
+  <data name="TipSelectRange">
+    <value>Select database,table and range. then click Create.</value>
+  </data>
+  <data name="Actions">
+    <value>Actions</value>
+  </data>
+  <data name="CalendarRange">
+    <value>Calendar Range</value>
+  </data>
+  <data name="DescriptionHeader">
+    <value>Description</value>
+  </data>
+  <data name="LanguageLabel">
+    <value>Language:</value>
+  </data>
+  <data name="SearchingInstances">
+    <value>Searching for SQL Server instances...</value>
+  </data>
+  <data name="NoLocalInstances">
+    <value>No local instances found.</value>
+  </data>
+  <data name="DatabasesLoaded">
+    <value>Databases loaded.</value>
+  </data>
+  <data name="CreatingTable">
+    <value>Creating table...</value>
+  </data>
+  <data name="OperationTimedOut">
+    <value>Operation timed out.</value>
+  </data>
+  <data name="ErrorPrefix">
+    <value>Error: </value>
+  </data>
+  <data name="NotEnoughDataTitle">
+    <value>Insufficient data</value>
+  </data>
+  <data name="NotEnoughDataMain">
+    <value>Please provide valid and complete information</value>
+  </data>
+  <data name="NotEnoughDataContent">
+    <value>The error is caused by missing or invalid input. Use More Info to see details.</value>
+  </data>
+  <data name="NotEnoughDataFooter">
+    <value>Created By Masoud Rahmani.</value>
+  </data>
+  <data name="CredentialDialogMain">
+    <value>Enter your username and password.</value>
+  </data>
+  <data name="CredentialDialogContent">
+    <value>These credentials are used to access the database and will not be stored permanently.</value>
+  </data>
+  <data name="CredentialWrong">
+    <value>Wrong credential.</value>
+  </data>
+	<data name="TableNameLabel">
+		<value>Table Name:</value>
+	</data>
+	<data name="LanguageLabel">
+		<value>Language</value>
+	</data>
+	<data name="ServerLabel">
+		<value>Server:</value>
+	</data>
+	<data name="DatabaseLabel">
+		<value>Database:</value>
+	</data>
+	<data name="SecurityLabel">
+		<value>Security:</value>
+	</data>
+	<data name="TableNameLabel">
+		<value>Table Name:</value>
+	</data>
+	
 </root>

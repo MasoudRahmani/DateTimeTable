@@ -19,7 +19,7 @@ namespace DateTimeTable.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "17.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "18.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -57,6 +57,141 @@ namespace DateTimeTable.Properties {
             }
             set {
                 resourceCulture = value;
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Actions.
+        /// </summary>
+        internal static string Actions {
+            get {
+                return ResourceManager.GetString("Actions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 🔍.
+        /// </summary>
+        internal static string Browse {
+            get {
+                return ResourceManager.GetString("Browse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Calendar Range.
+        /// </summary>
+        internal static string CalendarRange {
+            get {
+                return ResourceManager.GetString("CalendarRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Connection.
+        /// </summary>
+        internal static string ConnectionHeader {
+            get {
+                return ResourceManager.GetString("ConnectionHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Table.
+        /// </summary>
+        internal static string CreateTable {
+            get {
+                return ResourceManager.GetString("CreateTable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Creating table....
+        /// </summary>
+        internal static string CreatingTable {
+            get {
+                return ResourceManager.GetString("CreatingTable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to These credentials are used to access the database and will not be stored permanently..
+        /// </summary>
+        internal static string CredentialDialogContent {
+            get {
+                return ResourceManager.GetString("CredentialDialogContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your username and password..
+        /// </summary>
+        internal static string CredentialDialogMain {
+            get {
+                return ResourceManager.GetString("CredentialDialogMain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wrong credential..
+        /// </summary>
+        internal static string CredentialWrong {
+            get {
+                return ResourceManager.GetString("CredentialWrong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Database:.
+        /// </summary>
+        internal static string DatabaseLabel {
+            get {
+                return ResourceManager.GetString("DatabaseLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Databases loaded..
+        /// </summary>
+        internal static string DatabasesLoaded {
+            get {
+                return ResourceManager.GetString("DatabasesLoaded", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        internal static string DescriptionHeader {
+            get {
+                return ResourceManager.GetString("DescriptionHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to This application creates a calendar table in the selected database. Choose the server and database, set your date range, and press Create Table. Existing table names will be checked to avoid duplicates..
+        /// </summary>
+        internal static string DescriptionText {
+            get {
+                return ResourceManager.GetString("DescriptionText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to End.
+        /// </summary>
+        internal static string End {
+            get {
+                return ResourceManager.GetString("End", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error: .
+        /// </summary>
+        internal static string ErrorPrefix {
+            get {
+                return ResourceManager.GetString("ErrorPrefix", resourceCulture);
             }
         }
         
@@ -117,6 +252,132 @@ namespace DateTimeTable.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to DateTime Table.
+        /// </summary>
+        internal static string HeaderTitle {
+            get {
+                return ResourceManager.GetString("HeaderTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Integrated Security.
+        /// </summary>
+        internal static string IntegratedSecurity {
+            get {
+                return ResourceManager.GetString("IntegratedSecurity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        internal static string LanguageLabel {
+            get {
+                return ResourceManager.GetString("LanguageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No local instances found..
+        /// </summary>
+        internal static string NoLocalInstances {
+            get {
+                return ResourceManager.GetString("NoLocalInstances", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The error is caused by missing or invalid input. Use More Info to see details..
+        /// </summary>
+        internal static string NotEnoughDataContent {
+            get {
+                return ResourceManager.GetString("NotEnoughDataContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created By Masoud Rahmani..
+        /// </summary>
+        internal static string NotEnoughDataFooter {
+            get {
+                return ResourceManager.GetString("NotEnoughDataFooter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please provide valid and complete information.
+        /// </summary>
+        internal static string NotEnoughDataMain {
+            get {
+                return ResourceManager.GetString("NotEnoughDataMain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Insufficient data.
+        /// </summary>
+        internal static string NotEnoughDataTitle {
+            get {
+                return ResourceManager.GetString("NotEnoughDataTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Operation timed out..
+        /// </summary>
+        internal static string OperationTimedOut {
+            get {
+                return ResourceManager.GetString("OperationTimedOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Searching for SQL Server instances....
+        /// </summary>
+        internal static string SearchingInstances {
+            get {
+                return ResourceManager.GetString("SearchingInstances", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Security:.
+        /// </summary>
+        internal static string SecurityLabel {
+            get {
+                return ResourceManager.GetString("SecurityLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Server:.
+        /// </summary>
+        internal static string ServerLabel {
+            get {
+                return ResourceManager.GetString("ServerLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start.
+        /// </summary>
+        internal static string Start {
+            get {
+                return ResourceManager.GetString("Start", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create calendar tables quickly.
+        /// </summary>
+        internal static string Subtitle {
+            get {
+                return ResourceManager.GetString("Subtitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to CREATE TABLE [dbo].[DimDate](
         ///	[DateKey] [INT] NOT NULL,
         ///	[GregorianDate] [DATE] NULL,
@@ -135,6 +396,51 @@ namespace DateTimeTable.Properties {
         internal static string Table {
             get {
                 return ResourceManager.GetString("Table", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Table Name:.
+        /// </summary>
+        internal static string TableNameLabel {
+            get {
+                return ResourceManager.GetString("TableNameLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Load Databases.
+        /// </summary>
+        internal static string TestConnection {
+            get {
+                return ResourceManager.GetString("TestConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please load databases first..
+        /// </summary>
+        internal static string TipLoadDatabases {
+            get {
+                return ResourceManager.GetString("TipLoadDatabases", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select database,table and range. then click Create..
+        /// </summary>
+        internal static string TipSelectRange {
+            get {
+                return ResourceManager.GetString("TipSelectRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tip: Use the Browse button to auto-detect local SQL Server instances..
+        /// </summary>
+        internal static string TipText {
+            get {
+                return ResourceManager.GetString("TipText", resourceCulture);
             }
         }
     }

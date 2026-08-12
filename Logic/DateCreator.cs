@@ -38,7 +38,9 @@ namespace DateTimeTable.Logic
 
         private DataTable CreateSchemeTable()
         {
-            var createCommand = Properties.Resources.Table.Replace("[dbo].[DimDate]", $"[dbo].[{_sqlhelper.TableName}]").Replace("Pk_DimDateKey", $"Pk_{_sqlhelper.TableName}Key");
+            // Use quoted table name to support names starting with digits or containing special chars
+            var quoted = _sqlhelper.QuotedTableName; // e.g. [333]
+            var createCommand = Properties.Resources.Table.Replace("[dbo].[DimDate]", $"[dbo].{quoted}").Replace("Pk_DimDateKey", $"Pk_{_sqlhelper.TableName}Key");
             _sqlhelper.CreateTable(createCommand);
 
             return _sqlhelper.GetTableScheme();
@@ -48,12 +50,12 @@ namespace DateTimeTable.Logic
         {
             if (_sqlhelper.HasRows("SELECT 1 FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[GetShamsi]') AND type IN ( N'FN', N'IF', N'TF', N'FS', N'FT' );") == false)
             {
-                var getShamsi_cmd = Properties.Resources.GetShamsi.Replace("FROM dbo.DimDate", $"FROM dbo.{_sqlhelper.TableName}");
+                var getShamsi_cmd = Properties.Resources.GetShamsi.Replace("FROM dbo.DimDate", $"FROM dbo.{_sqlhelper.QuotedTableName}");
                 _sqlhelper.CreateFunction(getShamsi_cmd);
             }
             if (_sqlhelper.HasRows("SELECT 1 FROM sys.objects WHERE object_id = OBJECT_ID(N'[dbo].[GetMiladi]') AND type IN ( N'FN', N'IF', N'TF', N'FS', N'FT' )") == false)
             {
-                var getMiladi_cmd = Properties.Resources.GetMiladi.Replace("FROM dbo.DimDate", $"FROM dbo.{_sqlhelper.TableName}");
+                var getMiladi_cmd = Properties.Resources.GetMiladi.Replace("FROM dbo.DimDate", $"FROM dbo.{_sqlhelper.QuotedTableName}");
                 _sqlhelper.CreateFunction(getMiladi_cmd);
             }
         }
