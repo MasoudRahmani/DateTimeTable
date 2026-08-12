@@ -5,6 +5,7 @@ using System;
 using System.Data;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Globalization;
@@ -67,6 +68,15 @@ namespace DateTimeTable
                     StartDatePicker.SelectedDate = new DateTime(1993, 1, 1);
                 if (EndDatePicker != null && EndDatePicker.SelectedDate == null)
                     EndDatePicker.SelectedDate = new DateTime(2030, 1, 1);
+                // initial UI state: no databases loaded
+                if (Databases != null) Databases.IsEnabled = false;
+                if (CreateTableButton != null) CreateTableButton.IsEnabled = false;
+                // initial tip message
+                if (FlowTipText != null)
+                {
+                    FlowTipText.Text = Properties.Resources.ResourceManager.GetString("TipLoadDatabases", CultureInfo.CurrentUICulture) ?? "Please load databases first.";
+                    FlowTipText.Foreground = System.Windows.Media.Brushes.Red;
+                }
             }
             catch
             {
@@ -87,7 +97,7 @@ namespace DateTimeTable
         {
             try
             {
-                SetUiBusy("Fetching databases...");
+                SetUiBusy(Properties.Resources.ResourceManager.GetString("SearchingInstances", CultureInfo.CurrentUICulture) ?? "Fetching databases...");
                 var cts = new CancellationTokenSource(TimeSpan.FromSeconds(20));
                 _cts = cts;
 
@@ -99,7 +109,36 @@ namespace DateTimeTable
                 {
                     var result = await task;
                     Databases.ItemsSource = result;
-                    SetStatus("Databases loaded.");
+                    // enable databases combobox and create button if items exist
+                    try
+                    {
+                        var items = result as System.Collections.IEnumerable;
+                        bool hasAny = false;
+                        if (items != null)
+                        {
+                            foreach (var _ in items)
+                            {
+                                hasAny = true; break;
+                            }
+                        }
+                        Databases.IsEnabled = hasAny;
+                        CreateTableButton.IsEnabled = hasAny;
+                        if (FlowTipText != null)
+                        {
+                            if (hasAny)
+                            {
+                                FlowTipText.Text = Properties.Resources.ResourceManager.GetString("TipSelectRange", CultureInfo.CurrentUICulture) ?? "Select range and table name, then click Create.";
+                                FlowTipText.Foreground = System.Windows.Media.Brushes.Goldenrod;
+                            }
+                            else
+                            {
+                                FlowTipText.Text = Properties.Resources.ResourceManager.GetString("TipLoadDatabases", CultureInfo.CurrentUICulture) ?? "Please load databases first.";
+                                FlowTipText.Foreground = System.Windows.Media.Brushes.Red;
+                            }
+                        }
+                    }
+                    catch { }
+                    SetStatus(Properties.Resources.ResourceManager.GetString("DatabasesLoaded", CultureInfo.CurrentUICulture) ?? "Databases loaded.");
                 }
             }
             catch (OperationCanceledException)
@@ -116,16 +155,41 @@ namespace DateTimeTable
             }
         }
 
+        private void ServersCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            try
+            {
+                // Clear loaded databases when server changes
+                if (Databases != null)
+                {
+                    Databases.ItemsSource = null;
+                    Databases.IsEnabled = false;
+                }
+                if (CreateTableButton != null)
+                    CreateTableButton.IsEnabled = false;
+                if (FlowTipText != null)
+                {
+                    FlowTipText.Text = Properties.Resources.ResourceManager.GetString("TipLoadDatabases", CultureInfo.CurrentUICulture) ?? "Please load databases first.";
+                    FlowTipText.Foreground = System.Windows.Media.Brushes.Red;
+                }
+            }
+            catch { }
+        }
+
         #endregion
 
         private void NotEnoughData(string why)
         {
             using TaskDialog dialog = new();
-            dialog.WindowTitle = ".اطلاعات کافی نمی باشد";
-            dialog.MainInstruction = "لطفا اطلاعات را صحیح و کامل وارد فرمایید";
-            dialog.Content = ".این خطا به علت اشتباه بودن اطلاعات وارده یا کمبود اطلاعات می باشد\n .می تواند با کلیک بر اطلاعات بیشتر از علت خطا مطلع شوید";
+            var title = Properties.Resources.ResourceManager.GetString("NotEnoughDataTitle", CultureInfo.CurrentUICulture) ?? "Insufficient data";
+            var main = Properties.Resources.ResourceManager.GetString("NotEnoughDataMain", CultureInfo.CurrentUICulture) ?? "Please provide valid and complete information";
+            var content = Properties.Resources.ResourceManager.GetString("NotEnoughDataContent", CultureInfo.CurrentUICulture) ?? ".This error is caused by missing or invalid input. Use More Info to see details.";
+            var footer = Properties.Resources.ResourceManager.GetString("NotEnoughDataFooter", CultureInfo.CurrentUICulture) ?? "Created By Masoud Rahmani.";
+            dialog.WindowTitle = title;
+            dialog.MainInstruction = main;
+            dialog.Content = content;
             dialog.ExpandedInformation = why;
-            dialog.Footer = "Created By Masoud Rahmani.";
+            dialog.Footer = footer;
             dialog.FooterIcon = TaskDialogIcon.Shield;
             TaskDialogButton okButton = new TaskDialogButton(ButtonType.Ok);
             TaskDialogButton cancelButton = new TaskDialogButton(ButtonType.Cancel);
@@ -176,20 +240,21 @@ namespace DateTimeTable
 
         private async Task StartCreateAsync()
         {
-            UpdateLayoutToInformStartofJob("Creating table...");
+            UpdateLayoutToInformStartofJob(Properties.Resources.ResourceManager.GetString("CreatingTable", CultureInfo.CurrentUICulture) ?? "Creating table...");
             try
             {
                 DateCreator bl = new(_srv, _db, _table);
                 await CalculateDatesAsync(bl, TimeSpan.FromMinutes(5));
-                SetStatus("Creation finished.");
+                SetStatus(Properties.Resources.ResourceManager.GetString("DatabasesLoaded", CultureInfo.CurrentUICulture) ?? "Creation finished.");
             }
             catch (TimeoutException)
             {
-                SetStatus("Operation timed out.");
+                SetStatus(Properties.Resources.ResourceManager.GetString("OperationTimedOut", CultureInfo.CurrentUICulture) ?? "Operation timed out.");
             }
             catch (Exception ex)
             {
-                SetStatus("Error: " + ex.Message);
+                var prefix = Properties.Resources.ResourceManager.GetString("ErrorPrefix", CultureInfo.CurrentUICulture) ?? "Error: ";
+                SetStatus(prefix + ex.Message);
             }
             finally
             {
@@ -244,7 +309,10 @@ namespace DateTimeTable
             {
                 MainGrid.IsEnabled = false;
                 Progressbar.IsIndeterminate = true;
-                StatusText.Text = message;
+                if (StatusText != null)
+                    StatusText.Text = message;
+                else
+                    _pendingStatus = message;
             });
         }
 
@@ -254,10 +322,11 @@ namespace DateTimeTable
             {
                 MainGrid.IsEnabled = true;
                 Progressbar.IsIndeterminate = false;
+                var ready = Properties.Resources.ResourceManager.GetString("DatabasesLoaded", CultureInfo.CurrentUICulture) ?? "Ready";
                 if (StatusText != null)
-                    StatusText.Text = "Ready";
+                    StatusText.Text = ready;
                 else
-                    _pendingStatus = "Ready";
+                    _pendingStatus = ready;
             });
         }
 
@@ -326,7 +395,9 @@ namespace DateTimeTable
                 string? integrated = rm.GetString("IntegratedSecurity", culture);
                 string? start = rm.GetString("Start", culture);
                 string? end = rm.GetString("End", culture);
-                string? desc = rm.GetString("DescriptionText", culture);
+                string? d_header = rm.GetString("DescriptionHeader", culture);
+                string? d_text = rm.GetString("DescriptionText", culture);
+
                 string? tip = rm.GetString("TipText", culture);
                 string? servl = rm.GetString("ServerLabel", culture);
                 string? dbal = rm.GetString("DatabaseLabel", culture);
@@ -342,7 +413,8 @@ namespace DateTimeTable
                 var integratedChk = this.FindName("Integrated") as CheckBox;
                 var startLabel = this.FindName("StartLabel") as TextBlock;
                 var endLabel = this.FindName("EndLabel") as TextBlock;
-                var descBlock = this.FindName("DescriptionBody") as TextBlock;
+                var d_headerUI = this.FindName("DescriptionTextBlock") as TextBlock;
+                var d_UI = this.FindName("DescriptionBody") as TextBlock;
                 var tipBlock = this.FindName("TipTextBlock") as TextBlock;
                 var langLabel = this.FindName("LanguageLabel") as TextBlock;
 
@@ -360,11 +432,16 @@ namespace DateTimeTable
                 if (integratedChk != null && integrated != null) integratedChk.Content = integrated;
                 if (startLabel != null && start != null) startLabel.Text = start;
                 if (endLabel != null && end != null) endLabel.Text = end;
-                if (descBlock != null && desc != null) descBlock.Text = desc;
+                if (d_headerUI != null && d_header != null) d_headerUI.Text = d_header;
+                if (d_UI != null && d_text != null) d_UI.Text = d_text;
+
                 if (tipBlock != null && tip != null) tipBlock.Text = tip;
                 if (langLabel != null) langLabel.Text = rm.GetString("LanguageLabel", culture) ?? "Language:";
 
                 if (!string.IsNullOrEmpty(header)) this.Title = header;
+
+                // Update flow tip state so its text is localized according to current culture
+                UpdateFlowTipState();
             }
             catch
             {
@@ -372,11 +449,49 @@ namespace DateTimeTable
             }
         }
 
+        private void UpdateFlowTipState()
+        {
+            try
+            {
+                var flowTip = this.FindName("FlowTipText") as TextBlock;
+                if (flowTip == null) return;
+
+                // If databases enabled and has items -> show select-range tip (yellow)
+                bool hasDatabases = false;
+                if (Databases != null && Databases.IsEnabled && Databases.ItemsSource != null)
+                {
+                    var items = Databases.ItemsSource as System.Collections.IEnumerable;
+                    if (items != null)
+                    {
+                        foreach (var _ in items)
+                        {
+                            hasDatabases = true; break;
+                        }
+                    }
+                }
+
+                if (hasDatabases)
+                {
+                    flowTip.Text = Properties.Resources.ResourceManager.GetString("TipSelectRange", CultureInfo.CurrentUICulture) ?? "Select range and table name, then click Create.";
+                    flowTip.Foreground = System.Windows.Media.Brushes.Goldenrod;
+                }
+                else
+                {
+                    flowTip.Text = Properties.Resources.ResourceManager.GetString("TipLoadDatabases", CultureInfo.CurrentUICulture) ?? "Please load databases first.";
+                    flowTip.Foreground = System.Windows.Media.Brushes.Red;
+                }
+            }
+            catch
+            {
+                // ignore
+            }
+        }
+
         private async void BrowseServers_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                SetUiBusy("Searching for SQL Server instances...");
+                SetUiBusy(Properties.Resources.ResourceManager.GetString("SearchingInstances", CultureInfo.CurrentUICulture) ?? "Searching for SQL Server instances...");
                 await Task.Delay(50); // allow UI update
 
                 var list = new System.Collections.Generic.List<string>();
@@ -408,11 +523,20 @@ namespace DateTimeTable
                     ServersCombo.IsDropDownOpen = true;
                     ServersCombo.SelectedIndex = 0;
                     SelectedServer = list[0];
-                    SetStatus($"Found {list.Count} instances.");
+                    // Clear databases until user loads them
+                    if (Databases != null) Databases.ItemsSource = null;
+                    if (Databases != null) Databases.IsEnabled = false;
+                    if (CreateTableButton != null) CreateTableButton.IsEnabled = false;
+                    if (FlowTipText != null)
+                    {
+                        FlowTipText.Text = Properties.Resources.ResourceManager.GetString("TipLoadDatabases", CultureInfo.CurrentUICulture) ?? "Please load databases first.";
+                        FlowTipText.Foreground = System.Windows.Media.Brushes.Red;
+                    }
+                    SetStatus(string.Format(Properties.Resources.ResourceManager.GetString("DatabasesLoaded", CultureInfo.CurrentUICulture) ?? "Found {0} instances.", list.Count));
                 }
                 else
                 {
-                    SetStatus("No local instances found.");
+                    SetStatus(Properties.Resources.ResourceManager.GetString("NoLocalInstances", CultureInfo.CurrentUICulture) ?? "No local instances found.");
                 }
             }
             catch (Exception ex)
@@ -433,8 +557,10 @@ namespace DateTimeTable
         {
             using (CredentialDialog credentialDialog = new())
             {
-                credentialDialog.MainInstruction = "رمز و پسورد خود را وارد کنید.";
-                credentialDialog.Content = "این رمز و پسورد جهت ورود به دیتابیس استفاده میشود و بلافاصله از حافظه پاک میشود.";
+                var rm = Properties.Resources.ResourceManager;
+                var culture = CultureInfo.CurrentUICulture;
+                credentialDialog.MainInstruction = rm.GetString("CredentialDialogMain", culture) ?? "Enter your username and password.";
+                credentialDialog.Content = rm.GetString("CredentialDialogContent", culture) ?? "These credentials are used to access the database and will not be stored permanently.";
                 //credentialDialog.ShowSaveCheckBox = true;
                 //credentialDialog.ShowUIForSavedCredentials = true;
                 //// The target is the key under which the credentials will be stored.
@@ -454,7 +580,7 @@ namespace DateTimeTable
                     //    credentialDialog.ConfirmCredentials(true);
                     //else credentialDialog.ConfirmCredentials(false);
                     if (!result)
-                        NotEnoughData("رمز اشتباه است");
+                        NotEnoughData(rm.GetString("CredentialWrong", culture) ?? "Wrong credential.");
 
                     //بررسی cancel
                 }

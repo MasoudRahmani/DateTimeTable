@@ -61,6 +61,15 @@ namespace DateTimeTable.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Actions.
+        /// </summary>
+        internal static string Actions {
+            get {
+                return ResourceManager.GetString("Actions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 🔍.
         /// </summary>
         internal static string Browse {
@@ -102,6 +111,15 @@ namespace DateTimeTable.Properties {
         internal static string DatabaseLabel {
             get {
                 return ResourceManager.GetString("DatabaseLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Description.
+        /// </summary>
+        internal static string DescriptionHeader {
+            get {
+                return ResourceManager.GetString("DescriptionHeader", resourceCulture);
             }
         }
         
@@ -279,6 +297,24 @@ namespace DateTimeTable.Properties {
         internal static string TestConnection {
             get {
                 return ResourceManager.GetString("TestConnection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please load databases first..
+        /// </summary>
+        internal static string TipLoadDatabases {
+            get {
+                return ResourceManager.GetString("TipLoadDatabases", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select range and table name, then click Create..
+        /// </summary>
+        internal static string TipSelectRange {
+            get {
+                return ResourceManager.GetString("TipSelectRange", resourceCulture);
             }
         }
         

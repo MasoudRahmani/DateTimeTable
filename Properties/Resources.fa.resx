@@ -98,6 +98,69 @@
 	<data name="TableNameLabel">
 		<value>نام جدول</value>
 	</data>
+	<data name="TipLoadDatabases">
+		<value>لطفا ابتدا دیتابیس ها را بارگذاری کنید.</value>
+	</data>
+	<data name="TipSelectRange">
+		<value>بازه و نام جدول را انتخاب کنید سپس روی ایجاد کلیک کنید.</value>
+	</data>
+	<data name="Actions">
+		<value>عملیات</value>
+	</data>
+	<data name="DescriptionHeader">
+		<value>توضیحات</value>
+	</data>
+	<data name="SearchingInstances">
+		<value>در حال جستجو برای نمونه‌های SQL Server ...</value>
+	</data>
+	<data name="NoLocalInstances">
+		<value>نمونه محلی یافت نشد.</value>
+	</data>
+	<data name="DatabasesLoaded">
+		<value>دیتابیس‌ها بارگذاری شدند.</value>
+	</data>
+	<data name="CreatingTable">
+		<value>در حال ایجاد جدول...</value>
+	</data>
+	<data name="OperationTimedOut">
+		<value>عملیات با زمان مجاز به پایان رسید.</value>
+	</data>
+	<data name="ErrorPrefix">
+		<value>خطا: </value>
+	</data>
+	<data name="NotEnoughDataTitle">
+		<value>اطلاعات کافی نیست</value>
+	</data>
+	<data name="NotEnoughDataMain">
+		<value>لطفا اطلاعات صحیح و کامل وارد کنید</value>
+	</data>
+	<data name="NotEnoughDataContent">
+		<value>این خطا به علت کمبود یا اشتباه بودن اطلاعات رخ داده است. برای جزئیات از اطلاعات بیشتر استفاده کنید.</value>
+	</data>
+	<data name="NotEnoughDataFooter">
+		<value>Created By Masoud Rahmani.</value>
+	</data>
+	<data name="CredentialDialogMain">
+		<value>نام کاربری و رمز خود را وارد کنید.</value>
+	</data>
+	<data name="CredentialDialogContent">
+		<value>این اطلاعات جهت دسترسی به دیتابیس استفاده می‌شود و ذخیره نخواهند شد.</value>
+	</data>
+	<data name="CredentialWrong">
+		<value>اعتبارسنجی نامعتبر است.</value>
+	</data>
+	<data name="TipLoadDatabases">
+		<value>لطفا ابتدا دیتابیس ها را بارگذاری کنید.</value>
+	</data>
+	<data name="TipSelectRange">
+		<value>بازه و نام جدول را انتخاب کنید سپس روی ایجاد کلیک کنید.</value>
+	</data>
+	<data name="Actions">
+		<value>عملیات</value>
+	</data>
+	<data name="DescriptionHeader">
+		<value>توضیحات</value>
+	</data>
 	<data name="LanguageLabel">
 		<value>زبان</value>
 	</data>

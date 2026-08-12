@@ -163,6 +163,63 @@
   <data name="TipText">
     <value>Tip: Use the Browse button to auto-detect local SQL Server instances.</value>
   </data>
+  <data name="TipLoadDatabases">
+    <value>Please load databases first.</value>
+  </data>
+  <data name="TipSelectRange">
+    <value>Select range and table name, then click Create.</value>
+  </data>
+  <data name="Actions">
+    <value>Actions</value>
+  </data>
+  <data name="CalendarRange">
+    <value>Calendar Range</value>
+  </data>
+  <data name="DescriptionHeader">
+    <value>Description</value>
+  </data>
+  <data name="LanguageLabel">
+    <value>Language:</value>
+  </data>
+  <data name="SearchingInstances">
+    <value>Searching for SQL Server instances...</value>
+  </data>
+  <data name="NoLocalInstances">
+    <value>No local instances found.</value>
+  </data>
+  <data name="DatabasesLoaded">
+    <value>Databases loaded.</value>
+  </data>
+  <data name="CreatingTable">
+    <value>Creating table...</value>
+  </data>
+  <data name="OperationTimedOut">
+    <value>Operation timed out.</value>
+  </data>
+  <data name="ErrorPrefix">
+    <value>Error: </value>
+  </data>
+  <data name="NotEnoughDataTitle">
+    <value>Insufficient data</value>
+  </data>
+  <data name="NotEnoughDataMain">
+    <value>Please provide valid and complete information</value>
+  </data>
+  <data name="NotEnoughDataContent">
+    <value>The error is caused by missing or invalid input. Use More Info to see details.</value>
+  </data>
+  <data name="NotEnoughDataFooter">
+    <value>Created By Masoud Rahmani.</value>
+  </data>
+  <data name="CredentialDialogMain">
+    <value>Enter your username and password.</value>
+  </data>
+  <data name="CredentialDialogContent">
+    <value>These credentials are used to access the database and will not be stored permanently.</value>
+  </data>
+  <data name="CredentialWrong">
+    <value>Wrong credential.</value>
+  </data>
 	<data name="TableNameLabel">
 		<value>Table Name:</value>
 	</data>
@@ -181,4 +238,5 @@
 	<data name="TableNameLabel">
 		<value>Table Name:</value>
 	</data>
+	
 </root>

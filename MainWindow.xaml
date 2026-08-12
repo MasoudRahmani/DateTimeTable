@@ -66,17 +66,18 @@
                         <TextBlock Text="🖥️" FontSize="18" VerticalAlignment="Center" Margin="0,0,8,0" Foreground="#FF157F07" />
                         <TextBlock x:Name="ServerLabel" Text="Server:" FontSize="14" VerticalAlignment="Center" Margin="0,0,3,0" FontWeight="Bold"/>
                         <ComboBox x:Name="ServersCombo" MinWidth="220" MaxWidth="230" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center"
-                                  IsEditable="True" Text="{Binding SelectedServer, Mode=TwoWay}" BorderThickness="1,0,1,0" />
-                        <Button x:Name="BrowseServerButton" Content="🔍" Click="BrowseServers_Click" BorderThickness="0,0,0,0" Foreground="#FF0BADAA" Background="#00DDDDDD" />
+                                  IsEditable="True" Text="{Binding SelectedServer, Mode=TwoWay}" SelectionChanged="ServersCombo_SelectionChanged" />
+                        <Button x:Name="BrowseServerButton" Content="🔍" Click="BrowseServers_Click" BorderThickness="0" Foreground="#FF0BADAA" Background="Transparent" Margin="8,0,0,0" />
                     </StackPanel>
-                    <Button x:Name="Testbtn" Content="Load Databases" Height="32" Margin="0,8,0,8" Click="Fill_databases"
-                            HorizontalAlignment="Center" Padding="0,0,0,0" Background="#00E68686" BorderBrush="#FF014E88" Foreground="#FF000F5F" BorderThickness="0,2,0,2" RenderTransformOrigin="0.5,0.5" />
 
-                    <StackPanel Orientation="Horizontal" Margin="0,4,0,4"  >
+                    <Button x:Name="Testbtn" Content="Load Databases" Height="32" Margin="0,8,0,8" Click="Fill_databases"
+                            HorizontalAlignment="Center" Padding="6,0" Background="LightGray" />
+
+                    <StackPanel Orientation="Horizontal" Margin="0,4,0,4">
                         <TextBlock Text="🗄️" FontSize="18" VerticalAlignment="Center" />
                         <TextBlock x:Name="DatabaseLabel" Text="Database:" FontSize="14" VerticalAlignment="Center" Margin="0,0,3,0" FontWeight="Bold" />
                         <ComboBox x:Name="Databases" Height="30" SelectedValue="{Binding SelectedDatebase}" Background="AliceBlue"
-                                  MaxHeight="255" MinWidth="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                  MaxHeight="255" MinWidth="200" HorizontalAlignment="Center" VerticalAlignment="Center" IsEnabled="False" />
                     </StackPanel>
 
                     <StackPanel Orientation="Horizontal" Margin="0,4,0,4">
@@ -94,9 +95,10 @@
 
                     <Separator Margin="0,12" />
 
-                    <TextBlock Text="Actions" FontSize="14" FontWeight="SemiBold" Margin="0,6,0,6" />
+                    <TextBlock x:Name="ActionsTextBlock" Text="Actions" FontSize="14" FontWeight="SemiBold" Margin="0,6,0,6" />
                     <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
-                        <Button x:Name="CreateTableButton" Content="Create Table" Width="140" Height="36" Click="StartToCreate" VerticalAlignment="Center" />
+                        <Button x:Name="CreateTableButton" Content="Create Table" Width="140" Height="36" Click="StartToCreate" VerticalAlignment="Center" IsEnabled="False" />
+                        <TextBlock x:Name="FlowTipText" Text="Please load databases first." Foreground="Red" Margin="6,8,0,0" FontWeight="SemiBold" />
                     </StackPanel>
                 </StackPanel>
             </Border>
@@ -104,7 +106,7 @@
             <!-- Right panel: date range and description -->
             <Border Grid.Column="1" Background="White" CornerRadius="8" Padding="14">
                 <StackPanel>
-                    <TextBlock Text="Calendar Range" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,8" />
+                    <TextBlock x:Name="CalendarRangeTextBlock" Text="Calendar Range" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,8" />
 
                     <StackPanel Orientation="Horizontal" Margin="0,4,0,4" HorizontalAlignment="Left">
                         <StackPanel>
@@ -119,15 +121,13 @@
                     </StackPanel>
 
                     <TextBlock x:Name="DescriptionTextBlock" Text="Description" FontSize="14" FontWeight="SemiBold" Margin="0,10,0,6" />
-                    <TextBlock TextWrapping="Wrap" Opacity="0.85" FontSize="13" x:Name="DescriptionBody" MaxWidth="350">
+                    <TextBlock TextWrapping="Wrap" Opacity="0.85" FontSize="13" x:Name="DescriptionBody">
                         This application creates a calendar table in the selected database. Choose the server and database, set your date range, and press Create Table. Existing table names will be checked to avoid duplicates.
                     </TextBlock>
 
-                    <StackPanel Orientation="Horizontal" Margin="0,16,0,0" >
+                    <StackPanel Orientation="Horizontal" Margin="0,16,0,0">
                         <TextBlock x:Name="TipIcon" Text="📌" FontSize="14" VerticalAlignment="Top" Margin="0,2,8,0" />
-                        <TextBlock x:Name="TipTextBlock" TextWrapping="Wrap" Height="36" MaxWidth="350">
-                            Tip: Use the Browse button to auto-detect local SQL Server instances.
-                        </TextBlock>
+                        <TextBlock x:Name="TipTextBlock" Text="Tip: Use the Browse button to auto-detect local SQL Server instances." TextWrapping="Wrap" />
                     </StackPanel>
 
                 </StackPanel>
