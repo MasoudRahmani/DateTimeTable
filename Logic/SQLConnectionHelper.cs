@@ -10,6 +10,15 @@ namespace DateTimeTable.Logic
 {
     public class SQLConnectionHelper
     {
+        public static string QuoteIdentifier(string name)
+        {
+            if (string.IsNullOrEmpty(name)) return name ?? string.Empty;
+            // escape any closing bracket
+            return "[" + name.Replace("]", "]]") + "]";
+        }
+
+        public string QuotedTableName => QuoteIdentifier(TableName);
+
         private string _cnnSTR = string.Empty;
         private string _user = string.Empty;
         private string _password = string.Empty;
@@ -164,7 +173,9 @@ namespace DateTimeTable.Logic
             using (var sqlcnn = GetSqlConnection(ConnectionStringConfig.WithDatabase, true, true))
             {
                 sqlcnn.Open();
-                using (var adaptor = new SqlDataAdapter(string.Concat("select * from ", TableName), sqlcnn))
+                // Use quoted, schema-qualified table name to support names starting with digits or containing special chars
+                var fullName = string.Concat("[dbo].", QuotedTableName);
+                using (var adaptor = new SqlDataAdapter(string.Concat("select * from ", fullName), sqlcnn))
                 {
                     adaptor.FillSchema(dt, SchemaType.Source);
                 }
@@ -178,7 +189,8 @@ namespace DateTimeTable.Logic
                 sqlcnn.Open();
                 using (var bulk = new SqlBulkCopy(sqlcnn))
                 {
-                    bulk.DestinationTableName = TableName;
+                    // Ensure destination table is schema-qualified and quoted
+                    bulk.DestinationTableName = string.Concat("[dbo].", QuotedTableName);
 
                     bulk.WriteToServer(dataTable);
 
