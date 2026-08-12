@@ -5,222 +5,146 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:DateTimeTable"
         mc:Ignorable="d"
-        Title="ایجاد تقویم در پایگاه داده"
+        Title="Date Time Table Creator"
         Height="640"
-        MaxHeight="640"
-        MaxWidth="510"
-        Width="510">
-    <Grid x:Name="MainGrid"
-          Background="{DynamicResource {x:Static SystemColors.ControlBrushKey}}">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="181*" />
-            <RowDefinition Height="163*" />
-            <RowDefinition Height="178*" />
-            <RowDefinition Height="84*" />
-            <RowDefinition Height="20" />
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+        MaxHeight="800"
+        MaxWidth="900"
+        Width="800"
+        FontFamily="Segoe UI">
 
-        <TextBox Grid.Column="0"
-                 x:Name="ServerTextBox"
-                 HorizontalAlignment="Left"
-                 Height="37"
-                 Margin="10,39,0,0"
-                 TextWrapping="Wrap"
-                 VerticalAlignment="Top"
-                 Width="212"
-                 Text="{Binding SelectedServer}"
-                 Grid.Row="1"
-                 Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}"
-                 BorderBrush="{x:Null}"
-                 VerticalContentAlignment="Center"
-                 d:LayoutOverrides="VerticalAlignment" />
-        <TextBlock Grid.Row="1"
-                   HorizontalAlignment="Center"
-                   Margin="187,10,17,0"
-                   TextWrapping="Wrap"
-                   VerticalAlignment="Top"
-                   Height="29"
-                   Width="42"
-                   FontFamily="B Nazanin"
-                   FontSize="14"
-                   FlowDirection="RightToLeft"
-                   FontWeight="Bold"><Run FlowDirection="RightToLeft"
-                                          Text="سرور" /></TextBlock>
-        <CheckBox Grid.Column="0"
-                  Grid.Row="1"
-                  x:Name="Integrated"
-                  IsEnabled="{Binding IntegratedEnable}"
-                  Content="Integrated Security"
-                  HorizontalAlignment="Left"
-                  Margin="0,16,0,0"
-                  VerticalAlignment="Top"
-                  IsChecked="{Binding IntegratedChecked}"
-                  Unchecked="GetCredentialEvent"
-                  Height="15"
-                  Width="120"
-                  d:LayoutOverrides="HorizontalAlignment" />
-        <ComboBox Grid.Column="1"
-                  Grid.Row="2"
-                  x:Name="Databases"
-                  HorizontalAlignment="Left"
-                  Margin="10,50,0,0"
-                  VerticalAlignment="Top"
-                  Width="213"
-                  Height="40"
-                  SelectedValue="{Binding SelectedDatebase}"
-                  RenderTransformOrigin="0.637,0.791" />
-        <Button Grid.Column="0"
-                Grid.Row="3"
-                x:Name="CreateTableButton"
-                Content="ایجاد"
-                HorizontalAlignment="Left"
-                Margin="187,26,0,0"
-                VerticalAlignment="Top"
-                Width="127"
-                RenderTransformOrigin="0.028,-0.388"
-                Height="38"
-                Click="StartToCreate"
-                FontFamily="B Nazanin"
-                FontSize="15"
-                FontWeight="Bold"
-                Grid.ColumnSpan="2"
-                Background="{DynamicResource {x:Static SystemColors.MenuBrushKey}}" />
-        <Button Grid.Row="1"
-                x:Name="Testbtn"
-                Content="اتصال"
-                HorizontalAlignment="Center"
-                Margin="0,107,0,0"
-                VerticalAlignment="Top"
-                Width="96"
-                Click="Fill_databases"
-                Height="38"
-                FontFamily="B Nazanin"
-                FontSize="15"
-                FontWeight="Bold"
-                Background="{DynamicResource {x:Static SystemColors.MenuBrushKey}}" />
-        <TextBox Grid.Column="0"
-                 Grid.Row="2"
-                 x:Name="TableNameTextBox"
-                 Height="40"
-                 Margin="10,50,0,0"
-                 TextWrapping="Wrap"
-                 Text="{Binding TableName}"
-                 Width="212"
-                 Background="{DynamicResource {x:Static SystemColors.ControlLightBrushKey}}"
-                 BorderBrush="{x:Null}"
-                 HorizontalAlignment="Left"
-                 VerticalAlignment="Top"
-                 VerticalContentAlignment="Center" />
-        <TextBlock Grid.Column="0"
-                   HorizontalAlignment="Left"
-                   Margin="124,13,0,0"
-                   TextWrapping="Wrap"
-                   VerticalAlignment="Top"
-                   Grid.Row="2"
-                   FontFamily="B Nazanin"
-                   FontSize="14"
-                   FlowDirection="RightToLeft"
-                   FontWeight="Bold"
-                   Height="21"><Run FlowDirection="RightToLeft"
-                                    Language="fa-ir"
-                                    Text="نام جدول جهت ایجاد" /></TextBlock>
-        <TextBlock Grid.Column="1"
-                   HorizontalAlignment="Center"
-                   Margin="160,16,12,0"
-                   TextWrapping="Wrap"
-                   VerticalAlignment="Top"
-                   Grid.Row="2"
-                   Width="74"
-                   FontFamily="B Nazanin"
-                   FontSize="14"
-                   FlowDirection="RightToLeft"
-                   FontWeight="Bold"
-                   Height="21"><Run FlowDirection="RightToLeft"
-                                    Text="نام دیتایس" /></TextBlock>
-        <DatePicker x:Name="StartDatePicker"
-                    Grid.Column="1"
-                    HorizontalAlignment="Left"
-                    Margin="10,44,0,0"
-                    Grid.Row="1"
-                    VerticalAlignment="Top"
-                    Height="29"
-                    Width="213"
-                    DisplayDate="1900-01-01"
-                    SelectedDateFormat="Long"
-                    Text="1900-01-01"
-                    FirstDayOfWeek="Saturday"
-                    DisplayDateEnd="2070-01-01"
-                    Background="{x:Null}" />
-        <DatePicker x:Name="EndDatePicker"
-                    Grid.Column="1"
-                    HorizontalAlignment="Left"
-                    Margin="10,113,0,0"
-                    Grid.Row="1"
-                    VerticalAlignment="Top"
-                    Width="213"
-                    Text="2070-01-01"
-                    SelectedDateFormat="Long"
-                    Height="32"
-                    SelectedDate="2070-01-01"
-                    FirstDayOfWeek="Monday"
-                    DisplayDate="2070-01-01" />
-        <TextBlock Grid.Column="1"
-                   HorizontalAlignment="Center"
-                   Margin="176,7,12,0"
-                   Grid.Row="1"
-                   TextWrapping="Wrap"
-                   VerticalAlignment="Top"
-                   Width="58"
-                   FontFamily="B Nazanin"
-                   FontSize="14"
-                   FlowDirection="RightToLeft"
-                   FontWeight="Bold"
-                   Height="21"><Run FlowDirection="RightToLeft"
-                                    Text="از تاریخ" /></TextBlock>
-        <TextBlock Grid.Column="1"
-                   HorizontalAlignment="Center"
-                   Margin="176,78,11,0"
-                   Grid.Row="1"
-                   TextWrapping="Wrap"
-                   VerticalAlignment="Top"
-                   Width="59"
-                   FontFamily="B Nazanin"
-                   FontSize="14"
-                   FlowDirection="RightToLeft"
-                   FontWeight="Bold"
-                   Height="21"><Run FlowDirection="RightToLeft"
-                                    Text="تا تاریخ" /></TextBlock>
-        <TextBlock FlowDirection="RightToLeft"
-                   HorizontalAlignment="Center"
-                   Margin="11,48,23,45"
-                   TextWrapping="Wrap"
-                   VerticalAlignment="Center"
-                   Grid.ColumnSpan="2"
-                   Height="88"
-                   Width="458"
-                   FontFamily="B Nazanin"
-                   FontSize="15"><Run Text="لطفا دیتابیسی جهت ساخت جدول با نام دلخواه خود انتخاب بفرمایید تا جدول تقویم در آن ایجاد گردد." /><LineBreak /><Run Text="دقت داشته باشید که نباید نام جدول تکراری بوده باشد، بازه ی انتخابی شما در پایگاه داده ذخیره میگرد." /></TextBlock>
-        <TextBlock Grid.Column="1"
-                   HorizontalAlignment="Center"
-                   Margin="164,10,22,0"
-                   TextWrapping="Wrap"
-                   VerticalAlignment="Top"
-                   Width="60"
-                   FontFamily="B Nazanin"
-                   FontSize="14"
-                   FlowDirection="RightToLeft"
-                   FontWeight="Bold"
-                   Height="21"><Run FlowDirection="RightToLeft"
-                                    Text="توضیحات" /></TextBlock>
-        <ProgressBar x:Name="Progressbar"
-                     Grid.Row="4"
-                     Grid.Column="0"
-                     Grid.ColumnSpan="2"
-                     Minimum="0" />
+    <Grid x:Name="MainGrid" Background="#F3F4F6">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="72" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+
+        <!-- Header: app icon, title, language selector -->
+        <Border Grid.Row="0" Background="#0B5FFF" CornerRadius="0,0,8,8" Padding="12">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+
+                <!-- Globe icon -->
+                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Grid.Column="0">
+                    <TextBlock Text="🌐" FontSize="22" Margin="4" Foreground="#FFFFED2E"  />
+                    <TextBlock x:Name="HeaderTitleText" Text="DateTime Table" FontSize="18" FontWeight="Bold" Foreground="White" VerticalAlignment="Center" Margin="8,0,0,0" />
+                </StackPanel>
+
+                <!-- Spacer and subtitle -->
+                <StackPanel Grid.Column="1" VerticalAlignment="Center" Margin="12,0">
+                    <TextBlock x:Name="HeaderSubtitleText" Text="Create calendar tables quickly" Foreground="White" Opacity="0.95" />
+                </StackPanel>
+
+                <!-- Language selector -->
+                <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                    <TextBlock x:Name="LanguageLabel" Text="Language:" Foreground="White" VerticalAlignment="Center" Margin="0,0,8,0" />
+                    <ComboBox x:Name="LanguageCombo" Width="120" SelectedIndex="0" SelectionChanged="LanguageCombo_SelectionChanged">
+                        <ComboBoxItem Content="English" />
+                        <ComboBoxItem Content="فارسی" />
+                    </ComboBox>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- Main content -->
+        <Grid Grid.Row="1" Margin="10">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+
+            <!-- Left panel: connection and table info -->
+            <Border Grid.Column="0" Background="White" CornerRadius="8" Padding="14" Margin="0,0,12,0">
+                <StackPanel VerticalAlignment="Top">
+                    <TextBlock x:Name="ConnectionHeader" Text="Connection" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,8" />
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0,4,0,4">
+                        <TextBlock Text="🖥️" FontSize="18" VerticalAlignment="Center" Margin="0,0,8,0" Foreground="#FF157F07" />
+                        <TextBlock x:Name="ServerLabel" Text="Server:" FontSize="14" VerticalAlignment="Center" Margin="0,0,3,0" FontWeight="Bold"/>
+                        <ComboBox x:Name="ServersCombo" MinWidth="220" MaxWidth="230" Height="32" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                  IsEditable="True" Text="{Binding SelectedServer, Mode=TwoWay}" BorderThickness="1,0,1,0" />
+                        <Button x:Name="BrowseServerButton" Content="🔍" Click="BrowseServers_Click" BorderThickness="0,0,0,0" Foreground="#FF0BADAA" Background="#00DDDDDD" />
+                    </StackPanel>
+                    <Button x:Name="Testbtn" Content="Load Databases" Height="32" Margin="0,8,0,8" Click="Fill_databases"
+                            HorizontalAlignment="Center" Padding="0,0,0,0" Background="#00E68686" BorderBrush="#FF014E88" Foreground="#FF000F5F" BorderThickness="0,2,0,2" RenderTransformOrigin="0.5,0.5" />
+
+                    <StackPanel Orientation="Horizontal" Margin="0,4,0,4"  >
+                        <TextBlock Text="🗄️" FontSize="18" VerticalAlignment="Center" />
+                        <TextBlock x:Name="DatabaseLabel" Text="Database:" FontSize="14" VerticalAlignment="Center" Margin="0,0,3,0" FontWeight="Bold" />
+                        <ComboBox x:Name="Databases" Height="30" SelectedValue="{Binding SelectedDatebase}" Background="AliceBlue"
+                                  MaxHeight="255" MinWidth="200" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,4,0,4">
+                        <TextBlock Text="🔒" FontSize="18" VerticalAlignment="Center" />
+                        <TextBlock x:Name="SecurityLabel" Text="Security:" FontSize="14" VerticalAlignment="Center" Margin="0,0,3,0" FontWeight="Bold"/>
+                        <CheckBox x:Name="Integrated" IsEnabled="{Binding IntegratedEnable}" IsChecked="{Binding IntegratedChecked}" 
+                                  Content="Integrated Security" Unchecked="GetCredentialEvent" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </StackPanel>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                        <TextBlock Text="📋" FontSize="18" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <TextBlock x:Name="TableNameLabel" Text="Table Name:" FontSize="14" VerticalAlignment="Center" Margin="0,0,3,0" FontWeight="Bold" />
+                        <TextBox x:Name="TableNameTextBox" Text="{Binding TableName, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Width="200" MaxWidth="250" Height="32" />
+                    </StackPanel>
+
+                    <Separator Margin="0,12" />
+
+                    <TextBlock Text="Actions" FontSize="14" FontWeight="SemiBold" Margin="0,6,0,6" />
+                    <StackPanel Orientation="Vertical" HorizontalAlignment="Center">
+                        <Button x:Name="CreateTableButton" Content="Create Table" Width="140" Height="36" Click="StartToCreate" VerticalAlignment="Center" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <!-- Right panel: date range and description -->
+            <Border Grid.Column="1" Background="White" CornerRadius="8" Padding="14">
+                <StackPanel>
+                    <TextBlock Text="Calendar Range" FontSize="16" FontWeight="SemiBold" Margin="0,0,0,8" />
+
+                    <StackPanel Orientation="Horizontal" Margin="0,4,0,4" HorizontalAlignment="Left">
+                        <StackPanel>
+                            <TextBlock x:Name="StartLabel" Text="Start" FontWeight="Medium" />
+                            <DatePicker x:Name="StartDatePicker" Width="160" Height="30" SelectedDateFormat="Long" />
+                        </StackPanel>
+
+                        <StackPanel Margin="12,0,0,0">
+                            <TextBlock x:Name="EndLabel" Text="End" FontWeight="Medium" />
+                            <DatePicker x:Name="EndDatePicker" Width="160" Height="30" SelectedDateFormat="Long" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <TextBlock x:Name="DescriptionTextBlock" Text="Description" FontSize="14" FontWeight="SemiBold" Margin="0,10,0,6" />
+                    <TextBlock TextWrapping="Wrap" Opacity="0.85" FontSize="13" x:Name="DescriptionBody" MaxWidth="350">
+                        This application creates a calendar table in the selected database. Choose the server and database, set your date range, and press Create Table. Existing table names will be checked to avoid duplicates.
+                    </TextBlock>
+
+                    <StackPanel Orientation="Horizontal" Margin="0,16,0,0" >
+                        <TextBlock x:Name="TipIcon" Text="📌" FontSize="14" VerticalAlignment="Top" Margin="0,2,8,0" />
+                        <TextBlock x:Name="TipTextBlock" TextWrapping="Wrap" Height="36" MaxWidth="350">
+                            Tip: Use the Browse button to auto-detect local SQL Server instances.
+                        </TextBlock>
+                    </StackPanel>
+
+                </StackPanel>
+            </Border>
+        </Grid>
+        <!-- Footer: progress and status -->
+        <Border Grid.Row="2" Background="Transparent" Padding="10">
+            <DockPanel LastChildFill="True">
+                <ProgressBar x:Name="Progressbar" Minimum="0" Height="6" VerticalAlignment="Center" Width="200" DockPanel.Dock="Left" />
+                <StatusBar DockPanel.Dock="Bottom" VerticalAlignment="Center">
+                    <StatusBarItem>
+                        <TextBlock x:Name="StatusText" Text="Ready" />
+                    </StatusBarItem>
+                </StatusBar>
+            </DockPanel>
+        </Border>
+
     </Grid>
 </Window>
 
