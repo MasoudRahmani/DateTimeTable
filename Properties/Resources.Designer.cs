@@ -106,11 +106,56 @@ namespace DateTimeTable.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Creating table....
+        /// </summary>
+        internal static string CreatingTable {
+            get {
+                return ResourceManager.GetString("CreatingTable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to These credentials are used to access the database and will not be stored permanently..
+        /// </summary>
+        internal static string CredentialDialogContent {
+            get {
+                return ResourceManager.GetString("CredentialDialogContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your username and password..
+        /// </summary>
+        internal static string CredentialDialogMain {
+            get {
+                return ResourceManager.GetString("CredentialDialogMain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wrong credential..
+        /// </summary>
+        internal static string CredentialWrong {
+            get {
+                return ResourceManager.GetString("CredentialWrong", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Database:.
         /// </summary>
         internal static string DatabaseLabel {
             get {
                 return ResourceManager.GetString("DatabaseLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Databases loaded..
+        /// </summary>
+        internal static string DatabasesLoaded {
+            get {
+                return ResourceManager.GetString("DatabasesLoaded", resourceCulture);
             }
         }
         
@@ -138,6 +183,15 @@ namespace DateTimeTable.Properties {
         internal static string End {
             get {
                 return ResourceManager.GetString("End", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Error: .
+        /// </summary>
+        internal static string ErrorPrefix {
+            get {
+                return ResourceManager.GetString("ErrorPrefix", resourceCulture);
             }
         }
         
@@ -221,6 +275,69 @@ namespace DateTimeTable.Properties {
         internal static string LanguageLabel {
             get {
                 return ResourceManager.GetString("LanguageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No local instances found..
+        /// </summary>
+        internal static string NoLocalInstances {
+            get {
+                return ResourceManager.GetString("NoLocalInstances", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The error is caused by missing or invalid input. Use More Info to see details..
+        /// </summary>
+        internal static string NotEnoughDataContent {
+            get {
+                return ResourceManager.GetString("NotEnoughDataContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created By Masoud Rahmani..
+        /// </summary>
+        internal static string NotEnoughDataFooter {
+            get {
+                return ResourceManager.GetString("NotEnoughDataFooter", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please provide valid and complete information.
+        /// </summary>
+        internal static string NotEnoughDataMain {
+            get {
+                return ResourceManager.GetString("NotEnoughDataMain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Insufficient data.
+        /// </summary>
+        internal static string NotEnoughDataTitle {
+            get {
+                return ResourceManager.GetString("NotEnoughDataTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Operation timed out..
+        /// </summary>
+        internal static string OperationTimedOut {
+            get {
+                return ResourceManager.GetString("OperationTimedOut", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Searching for SQL Server instances....
+        /// </summary>
+        internal static string SearchingInstances {
+            get {
+                return ResourceManager.GetString("SearchingInstances", resourceCulture);
             }
         }
         
@@ -310,7 +427,7 @@ namespace DateTimeTable.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Select range and table name, then click Create..
+        ///   Looks up a localized string similar to Select database,table and range. then click Create..
         /// </summary>
         internal static string TipSelectRange {
             get {

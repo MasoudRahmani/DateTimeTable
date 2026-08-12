@@ -167,7 +167,7 @@
     <value>Please load databases first.</value>
   </data>
   <data name="TipSelectRange">
-    <value>Select range and table name, then click Create.</value>
+    <value>Select database,table and range. then click Create.</value>
   </data>
   <data name="Actions">
     <value>Actions</value>
